@@ -1,0 +1,9 @@
+INSERT INTO category (description) VALUES ('Russian');
+INSERT INTO category (description) VALUES ('Ukraine');
+INSERT INTO category (description) VALUES ('Kazahstanian');
+INSERT INTO category (description) VALUES ('French');
+INSERT INTO unit_of_measure (description) VALUES ('Cup');
+INSERT INTO unit_of_measure (description) VALUES ('Teaspoon');
+INSERT INTO unit_of_measure (description) VALUES ('Pinch');
+INSERT INTO unit_of_measure (description) VALUES ('Tablespoon');
+INSERT INTO unit_of_measure (description) VALUES ('Ounce');
