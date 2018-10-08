@@ -1,9 +1,21 @@
 INSERT INTO category (description) VALUES ('Russian');
 INSERT INTO category (description) VALUES ('Ukraine');
 INSERT INTO category (description) VALUES ('Kazahstanian');
-INSERT INTO category (description) VALUES ('French');
+INSERT INTO category (description) VALUES ('Dinner');
+INSERT INTO category (description) VALUES ('Grill');
+INSERT INTO category (description) VALUES ('Quick and easy');
+INSERT INTO category (description) VALUES ('Chicken');
+INSERT INTO category (description) VALUES ('Dip');
+INSERT INTO category (description) VALUES ('Mexican');
+INSERT INTO category (description) VALUES ('Vegan');
+INSERT INTO category (description) VALUES ('Avocado');
 INSERT INTO unit_of_measure (description) VALUES ('Cup');
 INSERT INTO unit_of_measure (description) VALUES ('Teaspoon');
 INSERT INTO unit_of_measure (description) VALUES ('Pinch');
 INSERT INTO unit_of_measure (description) VALUES ('Tablespoon');
 INSERT INTO unit_of_measure (description) VALUES ('Ounce');
+INSERT INTO unit_of_measure (description) VALUES ('Clove');
+INSERT INTO unit_of_measure (description) VALUES ('Pounds');
+INSERT INTO unit_of_measure (description) VALUES ('Pint');
+INSERT INTO unit_of_measure (description) VALUES ('Dash');
+

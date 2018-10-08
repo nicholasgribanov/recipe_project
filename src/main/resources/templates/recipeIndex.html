@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe List</title>
+</head>
+<body>
+<h2> Recipe List</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th th:text="id">Id</th>
+        <th th:text="description">Description</th>
+        <th th:text="prepCook">Prep Cook</th>
+        <th th:text="cookTime">Cook Time</th>
+        <th th:text="servings">Servings</th>
+        <th th:text="source">Source</th>
+        <th th:text="url">url</th>
+        <th th:text="directions">Directions</th>
+        <th th:text="Difficulty">Difficulty</th>
+        <th th:text="image">Image</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="recipe:${recipes}">
+        <td th:text="${recipe.id}">id</td>
+        <td th:text="${recipe.description}">description</td>
+        <td th:text="${recipe.prepCook}">prepCook</td>
+        <td th:text="${recipe.cookTime}">cookTime</td>
+        <td th:text="${recipe.servings}">servings</td>
+        <td th:text="${recipe.source}">source</td>
+        <td th:text="${recipe.url}">url</td>
+        <td th:text="${recipe.description}">description</td>
+        <td th:text="${recipe.difficulty}">difficulty</td>
+        <td th:text="${recipe.image}">image</td>
+    </tr>
+
+</tbody>
+</table>
+<br>
+<br>
+<br>
+<h2>Ingredients</h2>
+<table th:each="recipe:${recipes} ">
+    <tr th:each="in:${recipe.ingredients}">
+        <td th:text="${in.amount}  +' ' + ${in.description}+ ' ' + ${in.uom.description}">description</td>
+    </tr>
+</table>
+<br>
+<br>
+<br>
+<h2>Categories</h2>
+<table th:each="recipe:${recipes}">
+    <tr th:each="cat:${recipe.categories}">
+        <td th:text="${cat.description}">descr</td>
+    </tr>
+</table>
+<br>
+<h2>Notes</h2>
+<div th:each="recipe:${recipes}">
+    <p th:text="${recipe.notes.recipeNotes}"></p>
+</div>
+</body>
+</html>
