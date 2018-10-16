@@ -1,16 +1,19 @@
 package name.nicholasgribanov.recipe.bootstrap;
 
+import lombok.extern.slf4j.Slf4j;
 import name.nicholasgribanov.recipe.domain.*;
 import name.nicholasgribanov.recipe.repositories.CategoryRepository;
 import name.nicholasgribanov.recipe.repositories.RecipeRepository;
 import name.nicholasgribanov.recipe.repositories.UnitOfMeasureRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
+@Slf4j
 @Component
 public class DataLoader implements CommandLineRunner {
 
@@ -25,8 +28,9 @@ public class DataLoader implements CommandLineRunner {
     }
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
-
+        log.debug("Loading bootstrap Data");
 
 
         Recipe spicyGrilledChickenTacos = new Recipe();
@@ -130,16 +134,6 @@ public class DataLoader implements CommandLineRunner {
         spicyGrilledChickenTacos.setNotes(notes);
         spicyGrilledChickenTacos.setIngredients(ingredientsForSGCT);
         recipeRepository.save(spicyGrilledChickenTacos);
-
-
-
-
-
-
-
-
-
-
 
     }
 }
