@@ -34,8 +34,7 @@ public class DataLoader implements CommandLineRunner {
 
 
         Recipe spicyGrilledChickenTacos = new Recipe();
-        spicyGrilledChickenTacos.setDescription("Look for ancho chile powder with the Mexican ingredients" +
-                " at your grocery store, on buy it online.");
+        spicyGrilledChickenTacos.setDescription("Spicy Grilled Chicken Tacos");
         spicyGrilledChickenTacos.setCookTime(15);
         spicyGrilledChickenTacos.setPrepCook(20);
         spicyGrilledChickenTacos.setDifficulty(Difficulty.EAYSY);
