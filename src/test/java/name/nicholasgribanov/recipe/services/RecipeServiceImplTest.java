@@ -4,16 +4,17 @@ import name.nicholasgribanov.recipe.domain.Recipe;
 import name.nicholasgribanov.recipe.repositories.RecipeRepository;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.rules.Timeout;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.Mockito.*;
 
 public class RecipeServiceImplTest {
 
@@ -41,5 +42,20 @@ public class RecipeServiceImplTest {
         assertEquals(recipes.size(), 1);
 
         verify(recipeRepository, times(1)).findAll();
+    }
+
+    @Test
+    public void getRecipeById(){
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        when(recipeRepository.findById(anyLong())).thenReturn(Optional.of(recipe));
+
+        Recipe recipe1 = recipeService.getRecipeById(1L);
+
+        assertNotNull("Null recipe returned", recipe1);
+
+        verify(recipeRepository, times(1)).findById(anyLong());
+        verify(recipeRepository, never()).findAll();
     }
 }
