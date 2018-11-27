@@ -38,6 +38,10 @@ public class DataLoader implements CommandLineRunner {
         spicyGrilledChickenTacos.setCookTime(15);
         spicyGrilledChickenTacos.setPrepCook(20);
         spicyGrilledChickenTacos.setDifficulty(Difficulty.EAYSY);
+        spicyGrilledChickenTacos.setDirections("Directions example");
+        spicyGrilledChickenTacos.setServings(3);
+        spicyGrilledChickenTacos.setUrl("http://nicholasgribanov.name");
+        spicyGrilledChickenTacos.setSource("7");
 
 
         Set<Category> categoriesForSGCT = new HashSet<>();
