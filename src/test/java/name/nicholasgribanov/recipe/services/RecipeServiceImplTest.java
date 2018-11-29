@@ -1,10 +1,11 @@
 package name.nicholasgribanov.recipe.services;
 
+import name.nicholasgribanov.recipe.converters.RecipeCommandToRecipe;
+import name.nicholasgribanov.recipe.converters.RecipeToRecipeCommand;
 import name.nicholasgribanov.recipe.domain.Recipe;
 import name.nicholasgribanov.recipe.repositories.RecipeRepository;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.rules.Timeout;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -23,10 +24,16 @@ public class RecipeServiceImplTest {
     @Mock
     RecipeRepository recipeRepository;
 
+    @Mock
+    RecipeToRecipeCommand recipeToRecipeCommand;
+
+    @Mock
+    RecipeCommandToRecipe recipeCommandToRecipe;
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        recipeService = new RecipeServiceImpl(recipeRepository);
+        recipeService = new RecipeServiceImpl(recipeRepository, recipeToRecipeCommand, recipeCommandToRecipe);
     }
 
     @Test
@@ -45,7 +52,7 @@ public class RecipeServiceImplTest {
     }
 
     @Test
-    public void getRecipeById(){
+    public void getRecipeById() {
         Recipe recipe = new Recipe();
         recipe.setId(1L);
 
