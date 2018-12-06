@@ -40,8 +40,8 @@ public class IngredientToIngredientCommandTest {
         assertEquals(ID, ingredientCommand.getId());
         assertEquals(DESCRIPTION, ingredientCommand.getDescription());
         assertEquals(AMOUNT, ingredientCommand.getAmount());
-        assertEquals(ID,ingredientCommand.getUnitOfMeasure().getId());
-        assertEquals(DESCRIPTION, ingredientCommand.getUnitOfMeasure().getDescription());
+        assertEquals(ID,ingredientCommand.getUom().getId());
+        assertEquals(DESCRIPTION, ingredientCommand.getUom().getDescription());
     }
 
     @Test
