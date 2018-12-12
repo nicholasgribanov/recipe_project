@@ -2,6 +2,8 @@ package name.nicholasgribanov.recipe.controllers;
 
 import lombok.extern.slf4j.Slf4j;
 import name.nicholasgribanov.recipe.commands.IngredientCommand;
+import name.nicholasgribanov.recipe.commands.RecipeCommand;
+import name.nicholasgribanov.recipe.commands.UnitOfMeasureCommand;
 import name.nicholasgribanov.recipe.services.IngredientService;
 import name.nicholasgribanov.recipe.services.RecipeService;
 import name.nicholasgribanov.recipe.services.UnitOfMeasureService;
@@ -35,6 +37,26 @@ public class IngredientController {
     public String showRecipeIngredient(@PathVariable String recipeId, @PathVariable String ingredientId, Model model) {
         model.addAttribute("ingredient", ingredientService.findByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId)));
         return "recipe/ingredient/show";
+    }
+
+    @GetMapping
+    @RequestMapping("/recipe/{recipeId}/ingredient/new")
+    public String newRecipeIngredient(@PathVariable String recipeId, Model model){
+        RecipeCommand recipeCommand = recipeService.findRecipeCommandById(Long.valueOf(recipeId));
+        if(recipeCommand == null){
+            throw new RuntimeException("Recipe id = " + recipeId +" not found");
+        }
+        else {
+            IngredientCommand ingredientCommand = new IngredientCommand();
+            ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+            model.addAttribute("ingredient", ingredientCommand);
+
+            ingredientCommand.setUom(new UnitOfMeasureCommand());
+
+            model.addAttribute("uomList", unitOfMeasureService.findAllUom());
+
+            return "recipe/ingredient/ingredientform";
+        }
     }
 
     @GetMapping
