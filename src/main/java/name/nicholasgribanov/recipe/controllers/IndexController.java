@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import name.nicholasgribanov.recipe.services.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -16,7 +17,7 @@ public class IndexController {
         this.recipeService = recipeService;
     }
 
-    @RequestMapping({"","/","/index"})
+    @GetMapping({"","/","/index"})
     public String getIndexPage(Model model){
         log.debug("Get Index page");
         model.addAttribute("recipes", recipeService.getRecipes());
