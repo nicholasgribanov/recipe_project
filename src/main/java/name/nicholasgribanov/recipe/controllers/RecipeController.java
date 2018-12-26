@@ -2,11 +2,14 @@ package name.nicholasgribanov.recipe.controllers;
 
 
 import lombok.extern.slf4j.Slf4j;
+import name.nicholasgribanov.recipe.NotFoundException;
 import name.nicholasgribanov.recipe.commands.RecipeCommand;
 import name.nicholasgribanov.recipe.services.RecipeService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @Controller
@@ -54,5 +57,14 @@ public class RecipeController {
         recipeService.deleteById(new Long(id));
         log.debug("Deleted id = {} ", id);
         return "redirect:/";
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(NotFoundException.class)
+    public ModelAndView notFoundHandling(){
+        log.error("Page not found");
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("404error");
+        return modelAndView;
     }
 }
