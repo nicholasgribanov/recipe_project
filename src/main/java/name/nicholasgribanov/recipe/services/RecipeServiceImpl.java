@@ -1,6 +1,7 @@
 package name.nicholasgribanov.recipe.services;
 
 import lombok.extern.slf4j.Slf4j;
+import name.nicholasgribanov.recipe.NotFoundException;
 import name.nicholasgribanov.recipe.commands.RecipeCommand;
 import name.nicholasgribanov.recipe.converters.RecipeCommandToRecipe;
 import name.nicholasgribanov.recipe.converters.RecipeToRecipeCommand;
@@ -40,7 +41,7 @@ public class RecipeServiceImpl implements RecipeService {
     public Recipe getRecipeById(Long id) {
         Optional<Recipe> recipe = recipeRepository.findById(id);
         if (!recipe.isPresent()) {
-            throw new RuntimeException("Recipe for id = " + id + " not found!");
+            throw new NotFoundException("Recipe for id = " + id + " not found!");
         }
         return recipe.get();
     }

@@ -1,5 +1,6 @@
 package name.nicholasgribanov.recipe.services;
 
+import name.nicholasgribanov.recipe.NotFoundException;
 import name.nicholasgribanov.recipe.converters.RecipeCommandToRecipe;
 import name.nicholasgribanov.recipe.converters.RecipeToRecipeCommand;
 import name.nicholasgribanov.recipe.domain.Recipe;
@@ -68,6 +69,16 @@ public class RecipeServiceImplTest {
 
     @Test
     public void deleteById(){
+
+    }
+
+    @Test(expected = NotFoundException.class)
+    public void notFoundRecipe(){
+        Optional<Recipe> recipeOptional = Optional.empty();
+
+        when(recipeRepository.findById(anyLong())).thenReturn(recipeOptional);
+
+        Recipe recipe = recipeService.getRecipeById(1L);
 
     }
 }

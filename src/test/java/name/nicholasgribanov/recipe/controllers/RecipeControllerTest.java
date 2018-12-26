@@ -1,5 +1,6 @@
 package name.nicholasgribanov.recipe.controllers;
 
+import name.nicholasgribanov.recipe.NotFoundException;
 import name.nicholasgribanov.recipe.commands.RecipeCommand;
 import name.nicholasgribanov.recipe.domain.Recipe;
 import name.nicholasgribanov.recipe.services.RecipeService;
@@ -9,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import java.util.Optional;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -52,6 +55,18 @@ public class RecipeControllerTest {
     }
 
     @Test
+    public void recipeNotFound() throws Exception{
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        when(recipeService.getRecipeById(anyLong())).thenThrow(NotFoundException.class);
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(status().isNotFound());
+
+    }
+
+    @Test
     public void savedOrUpdateTest() throws Exception {
         RecipeCommand recipe = new RecipeCommand();
         recipe.setId(2L);
@@ -60,7 +75,7 @@ public class RecipeControllerTest {
 
         when(recipeService.saveRecipeCommand(any())).thenReturn(recipe);
 
-        mockMvc.perform(post("/recipe/2/update"))
+        mockMvc.perform(get("/recipe/2/update"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/recipeform"));
     }
