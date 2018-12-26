@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><head>
     <meta charset="UTF-8">
     <title>404 Not Found</title>
 </head>
 <body>
-<div style="margin: 50%">
+<div style="margin: 10%">
     <h1>Not found</h1>
+    <p th:text="${exception.getMessage()}"></p>
 
 </div>
 </body>
