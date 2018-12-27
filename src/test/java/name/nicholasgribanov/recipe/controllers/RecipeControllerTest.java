@@ -32,19 +32,19 @@ public class RecipeControllerTest {
 
     RecipeController recipeController;
 
+    MockMvc mockMvc;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-
         recipeController = new RecipeController(recipeService);
+        mockMvc = MockMvcBuilders.standaloneSetup(recipeController).setControllerAdvice(new ControllerExceptionHandling()).build();
     }
 
     @Test
     public void getRecipeById() throws Exception {
         Recipe recipe = new Recipe();
         recipe.setId(1L);
-
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
 
         when(recipeService.getRecipeById(anyLong())).thenReturn(recipe);
 
@@ -60,7 +60,6 @@ public class RecipeControllerTest {
         recipe.setId(1L);
 
         when(recipeService.getRecipeById(anyLong())).thenThrow(NotFoundException.class);
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
         mockMvc.perform(get("/recipe/1/show"))
                 .andExpect(status().isNotFound())
                 .andExpect(view().name("404error"));
@@ -70,7 +69,6 @@ public class RecipeControllerTest {
     @Test
     public void numberFormatException() throws Exception {
 
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
         mockMvc.perform(get("/recipe/sdsd/show"))
                 .andExpect(status().isBadRequest())
                 .andExpect(view().name("400error"));
@@ -82,8 +80,6 @@ public class RecipeControllerTest {
         RecipeCommand recipe = new RecipeCommand();
         recipe.setId(2L);
 
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
-
         when(recipeService.saveRecipeCommand(any())).thenReturn(recipe);
 
         mockMvc.perform(get("/recipe/2/update"))
@@ -93,8 +89,6 @@ public class RecipeControllerTest {
 
     @Test
     public void deleteById() throws Exception {
-
-        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(recipeController).build();
 
         mockMvc.perform(get("/recipe/1/delete"))
                 .andExpect(status().is3xxRedirection())
